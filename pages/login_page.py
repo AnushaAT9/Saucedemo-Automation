@@ -1,24 +1,30 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import json
 
 class LoginPage:
-
-    USERNAME = (By.ID, "user-name")
-    PASSWORD = (By.ID, "password")
-    LOGIN_BTN = (By.ID, "login-button")
-    DASHBOARD = (By.CLASS_NAME, "inventory_list")
-
-    def __init__(self, driver):
+    def __init__(self, driver, config):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 10)
+        self.config = config
 
-    def login(self, username, password):
-        self.wait.until(EC.visibility_of_element_located(self.USERNAME)).send_keys(username)
-        self.driver.find_element(*self.PASSWORD).send_keys(password)
-        self.driver.find_element(*self.LOGIN_BTN).click()
+        self.id_username = "user-name"
+        self.id_password = "password"
+        self.id_login_button = "login-button"
 
-    def is_logged_in(self):
-        return self.wait.until(
-            EC.visibility_of_element_located(self.DASHBOARD)
-        ).is_displayed()
+    def enter_username(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, self.id_username))
+        ).send_keys(self.config["username"])
+
+    def enter_password(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.ID, self.id_password))
+        ).send_keys(self.config["password"])
+
+    def click_login(self):
+        wait = WebDriverWait(self.driver, 10)
+        login_button = wait.until(
+            EC.element_to_be_clickable((By.ID, self.id_login_button))
+        )
+        login_button.click()
