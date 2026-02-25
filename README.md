@@ -42,11 +42,8 @@ reports/ – Test reports
 4. Install dependencies:
    pip install -r requirements.txt
 
-5. Run tests:
-   pytest -v
-
-6. Generate report:
-   pytest --html=reports/report.html --self-contained-html
+5. Run tests with HTML:
+  pytest -v --html=reports/report.html --self-contained-html
 
 ---
 
