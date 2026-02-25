@@ -11,7 +11,6 @@ def get_driver():
 
     chrome_options = Options()
 
-    # ✅ Disable Chrome password manager & breach popup
     chrome_options.add_experimental_option("prefs", {
         "credentials_enable_service": False,
         "profile.password_manager_enabled": False
@@ -21,7 +20,6 @@ def get_driver():
     chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument("--incognito")
 
-    # Headless handling
     if config["headless"]:
         chrome_options.add_argument("--headless=new")
         chrome_options.add_argument("--window-size=1920,1080")

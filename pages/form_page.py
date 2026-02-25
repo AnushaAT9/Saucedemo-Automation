@@ -34,31 +34,24 @@ class FormPage:
             EC.element_to_be_clickable((By.ID, self.check_out_id))
         ).click()
 
-        # IMPORTANT: wait for checkout page to fully load
         WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.ID, self.first_name_id))
         )
 
     def enter_first_name(self, first):
-        field = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.ID, self.first_name_id))
-        )
-        field.clear()
-        field.send_keys(first)
+        ).send_keys(first)
 
     def enter_last_name(self, last):
-        field = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.ID, self.last_name_id))
-        )
-        field.clear()
-        field.send_keys(last)
+        ).send_keys(last)
 
     def enter_postal_code(self, postal):
-        field = WebDriverWait(self.driver, 10).until(
+        WebDriverWait(self.driver, 10).until(
             EC.visibility_of_element_located((By.ID, self.postal_code_id))
-        )
-        field.clear()
-        field.send_keys(postal)
+        ).send_keys(postal)
 
     def click_continue(self):
         WebDriverWait(self.driver, 10).until(

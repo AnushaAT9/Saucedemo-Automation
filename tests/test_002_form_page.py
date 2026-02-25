@@ -1,4 +1,3 @@
-from pages.login_page import LoginPage
 from pages.form_page import FormPage
 from pages.login_page import LoginPage
 
@@ -16,7 +15,6 @@ def test_checkout_form(driver):
     login_page.enter_password()
     login_page.click_login()
 
-    # Checkout flow
     form_page = FormPage(driver, config)
 
     form_page.add_to_cart()
@@ -31,7 +29,6 @@ def test_checkout_form(driver):
     form_page.click_continue()
     form_page.click_finish()
 
-    # Verify success message
     success = form_page.verify_success_message()
 
     assert success.is_displayed()
